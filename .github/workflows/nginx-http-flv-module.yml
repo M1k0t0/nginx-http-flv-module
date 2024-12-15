@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NGINX_VERSION: nginx-1.26.2
+      NGINX_VERSION: nginx-1.27.3
 
     steps:
     - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       run: tar zxvf ${{env.NGINX_VERSION}}.tar.gz
     - name: configure (build as a dynamic module)
       working-directory: ../${{env.NGINX_VERSION}}
-      run: ./configure --add-dynamic-module=../nginx-http-flv-module
+      run: ./configure --with-compat --with-http_ssl_module --add-dynamic-module=../nginx-http-flv-module
     - name: make
       working-directory: ../${{env.NGINX_VERSION}}
       run: make
